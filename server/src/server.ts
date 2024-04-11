@@ -87,7 +87,7 @@ documents.onDidChangeContent((change) => {
       message: `${m[0]} is all uppercase.`,
       source: "Diagnostics Demo",
     };
-    diagnostics.push(diagnostic);
+    // diagnostics.push(diagnostic);
   }
 
   // Send the computed diagnostics to VSCode.
@@ -127,7 +127,7 @@ connection.onDocumentHighlight(
     const { textDocument } = params;
     const doc = documents.get(textDocument.uri)!;
     const text = doc.getText();
-    const pattern = /\btecvan\b/i;
+    const pattern = /\bopaque\b/i;
     const res: DocumentHighlight[] = [];
     let match;
     while ((match = pattern.exec(text))) {
@@ -167,18 +167,44 @@ connection.onSignatureHelp(
 // This handler provides the initial list of the completion items.
 connection.onCompletion(
   (_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-    return [
-      {
-        label: "Tecvan",
-        kind: CompletionItemKind.Text,
+    // const currentContext = analyzeContext(_textDocumentPosition.textDocument.uri, _textDocumentPosition.position);
+    // 假设 analyzeContext 返回一个包含了所有可能的数据类型补全的列表
+    const dataTypeKeywords = ['int', 'bool', 'double', 'qubit','unit'];
+    const operationKeywords = ['operation', 'opaque'];
+    //if|else|while|for|return|break|continue|do|default|goto|label|sizeof|import
+    const  controlKeywords = ['if', 'else', 'while', 'for', 'return', 'break', 'continue', 'do', 'default', 'goto', 'label', 'sizeof', 'import'];
+    const completionItems: CompletionItem[] = [];
+
+    dataTypeKeywords.forEach(type => {
+      completionItems.push({
+        label: type,
+        kind: CompletionItemKind.Value,
+        // detail: `Type ${type}`,
         data: 1,
-      },
-      {
-        label: "JavaScript",
-        kind: CompletionItemKind.Text,
+      });
+    });
+    // getTextDocumentContent();
+
+    operationKeywords.forEach(operation => {
+      completionItems.push({
+        label: operation,
+        kind: CompletionItemKind.Function, // 或 CompletionItemKind.Method，取决于quingo语言的具体定义
+        // detail: `${operation} operation`,
         data: 2,
-      },
-    ];
+      });
+    });
+    
+    controlKeywords.forEach(control => {
+      completionItems.push({
+        label: control,
+        kind: CompletionItemKind.Keyword,
+        // detail: `Type ${type}`,
+        data: 3,
+      });
+    });
+    
+    return completionItems;
+    // 根据当前上下文补全
   }
 );
 
@@ -186,12 +212,19 @@ connection.onCompletion(
 // the completion list.
 connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
   console.log("request completion resolve");
+  // const dataTypeKeywords = ['int', 'bool', 'double', 'qubit','unit'];
   if (item.data === 1) {
-    item.detail = "Tecvan is Awesome";
-    item.documentation = "公众号：Tecvan";
+    item.detail = `Quingo数据类型`;
+    // item.documentation = "Quingo 基本数据类型";
   } else if (item.data === 2) {
-    item.detail = "Tecvan is Good At Javascript";
-    item.documentation = "公众号：Tecvan";
+    item.detail = "Quingo原子操作";
+    // item.documentation = "Quingo language";
+  } else if(item.data === 3){
+    item.detail = "Quingo控制语句";
   }
   return item;
 });
+function getTextDocumentContent() {
+  throw new Error("Function not implemented.");
+}
+
