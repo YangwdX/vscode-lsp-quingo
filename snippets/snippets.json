@@ -1,0 +1,13 @@
+{
+    "Using Statement": {
+        "prefix": [
+            "using"
+        ],
+        "body": [
+            "using (${1:<qubit binding list>}) {",
+            "\t\/*statements*\/$0",
+            "}"
+        ],
+        "description": "A using binding sentence."
+    }
+}

@@ -1,0 +1,28 @@
+// line comment
+/* this is 
+block comment */
+
+opaque CNOT(q1: qubit, q2: qubit): unit;
+opaque H(q: qubit): unit;
+opaque measure(q: qubit): bool;
+int  s;
+double t;
+toInt(1.0);
+operation bell_state(q1: qubit, q2: qubit) : unit {
+    H(q1);
+    CNOT(q1, q2);
+}
+double temp;
+
+operation main() : bool[] {
+    bool[2] a;
+    using(q1: qubit, q2: qubit) {
+        bell_state(q1, q2);
+        a[0] = measure(q1);
+        a[1] = measure(q2);
+    }
+
+    return a;
+}
+true
+false

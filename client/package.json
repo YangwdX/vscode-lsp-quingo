@@ -1,5 +1,5 @@
 {
-	"name": "lsp-sample-client",
+	"name": "lsp-quingo-client",
 	"description": "VSCode part of a language server",
 	"author": "Microsoft Corporation",
 	"license": "MIT",
@@ -7,7 +7,7 @@
 	"publisher": "vscode",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Tecvan-fe/vscode-lsp-sample"
+		"url": "https://github.com/YangwdX/vscode-lsp-quingo.git"
 	},
 	"engines": {
 		"vscode": "^1.52.0"

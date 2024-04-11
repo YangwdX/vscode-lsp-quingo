@@ -1,0 +1,148 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Quingo",
+    "scopeName": "source.quingo",
+    "patterns": [
+        {
+            "include": "#expression"
+        }
+    ],
+    "repository": {
+        "expression": {
+            "patterns": [
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#paren-expression"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#entitys"
+                },
+                {
+                    "include": "#support-function"
+                },
+                {
+                    "include": "#numbers"
+                },
+                {
+                    "include": "#operations"
+                },
+                {
+                    "include": "#variables"
+                },
+                {
+                    "include": "string"
+                }
+            ]
+        },
+        "variables": {
+            "patterns": [
+                {
+                    "match": "\\b(\\w+)\\b",
+                    "name": "variable.other.quingo"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "match": "\\b(0b[01]+|0B[01]+)\\b",
+                    "name": "constant.numeric.binary.quingo"
+                },
+                {
+                    "match": "\\b0[0-7]+\\b",
+                    "name": "constant.numeric.octal.quingo"
+                },
+                {
+                    "match": "\\b(0x[0-9a-fA-F]+|0X[0-9a-fA-F]+)\\b",
+                    "name": "constant.numeric.hex.quingo"
+                },
+                {
+                    "match": "(?<!\\.)\\b-?(?:0|[1-9]\\d*)(\\.\\d+)?([eE][-+]?\\d+)?\\b",
+                    "name": "constant.numeric.decimal.quingo"
+                },
+                {
+                    "match": "\\b(true|false)\\b",
+                    "name": "constant.language.quingo"
+                },
+                {
+                    "match": "\\b(null)\\b",
+                    "name": "constant.language.null.quingo"
+                }
+            ]
+        },
+        "operations": {
+            "match": "\\b(opaque|operation)\\b",
+            "name": "support.class.quingo"
+        },
+        "support-function": {
+            "patterns": [
+                {
+                    "match": "\\b(\\w+)(?=\\s*\\()",
+                    "name": "support.function.quingo"
+                }
+            ]
+        },
+        "keywords": {
+            "match": "\\b(if|else|while|for|return|break|continue|do|default|goto|label|sizeof|import)\\b",
+            "name": "keyword.control.quingo"
+        },
+        "entitys": {
+            "match": "\\b(int|bool|double|unit|qubit)\\b",
+            "name": "storage.type.quingo"
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "include": "#line-comment"
+                },
+                {
+                    "include": "#block-comment"
+                }
+            ]
+        },
+        "line-comment": {
+            "name": "comment.line.double-slash.quingo",
+            "match": "//.+$"
+        },
+        "block-comment": {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.comment.start"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.comment.end"
+                }
+            },
+            "name": "comment.block.quingo"
+        },
+        "paren-expression": {
+            "begin": "\\(",
+            "end": "\\)",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.paren.open"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.paren.close"
+                }
+            },
+            "name": "expression.group",
+            "patterns": [
+                {
+                    "include": "#expression"
+                }
+            ]
+        }
+    }
+}

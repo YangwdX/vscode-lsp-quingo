@@ -1,20 +1,48 @@
 {
-	"name": "vscode-lsp-sample",
-	"description": "A language server example",
-	"author": "Tecvan",
+	"name": "vscode-lsp-quingo",
+	"description": "A vscode extension for Quingo language",
+	"author": "Yangwd",
 	"license": "MIT",
 	"version": "1.0.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Tecvan-fe/vscode-lsp-sample"
+		"url": "https://github.com/YangwdX/vscode-lsp-quingo.git"
 	},
-	"categories": [],
-	"engines": {
-		"vscode": "^1.43.0"
-	},
-	"activationEvents": [
-		"onLanguage:plaintext"
+	"categories": [
+		"Programming Languages",
+		"Snippets"
 	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "quingo",
+				"aliases": [
+					"Quingo",
+					"quingo"
+				],
+				"extensions": [
+					".qu"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "quingo",
+				"scopeName": "source.quingo",
+				"path": "./syntaxes/quingo.tmlanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "quingo",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	},
+	"engines": {
+		"vscode": "^1.52.0"
+	},
 	"main": "./client/out/extension",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -27,8 +55,8 @@
 		"@types/node": "^12.12.0",
 		"@typescript-eslint/eslint-plugin": "^4.23.0",
 		"@typescript-eslint/parser": "^4.23.0",
-		"eslint": "^7.26.0",
-		"mocha": "^8.3.2",
+		"eslint": "^7.32.0",
+		"mocha": "^10.3.0",
 		"typescript": "^4.3.2"
 	}
 }
