@@ -1,5 +1,14 @@
-# VSCode LSP Example
+# VSCode LSP Quingo
 
-A VSCode Language Server Protocol sample forks from Microsoft/vscode-extension-samples.
+A VSCode Extension for Quingo language.
 
-No more...
+## Features
+- Syntax highlighting
+- snippets
+- Basic code completion
+- lsp server demo
+    ### To be completed
+    - Diagnostics reporting
+    - jump to definition
+    - hover type info
+    - ...
